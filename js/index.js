@@ -56,11 +56,11 @@ function generateFacts(facts){
 
   var paragraph = '';
 
-  for (var i = 0; i < 8; i++) {
-      if (i === 7) {
+  for (var i = 0; i < 6; i++) {
+      if (i === 5) {
           paragraph += facts[getRandomInt(0, facts.length - 1)] + '.';
       } else {
-          paragraph += facts[getRandomInt(0, facts.length - 1)] + ', ';
+          paragraph += facts[getRandomInt(0, facts.length - 1)] + '. ';
       }
   }
 
@@ -111,9 +111,18 @@ function generateLorem(paragraphsNumber) {
     request.send();
 }
 
-
 document.querySelector('#r1').addEventListener('change', function(e){
 
   generateLorem(e.target.value);
 
 });
+
+document.querySelector('#r1').addEventListener('click', function(e){
+
+  generateLorem(e.target.value);
+
+});
+
+generateLorem(1);
+
+var clipboard = new Clipboard('.copy');

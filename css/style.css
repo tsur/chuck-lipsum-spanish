@@ -1,3 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Special+Elite);
+
+@font-face {
+    font-family: fonta;
+    src: url(a.ttf);
+}
+
 html {
   background: #3a3535;
 }
@@ -66,7 +73,7 @@ input[type='range']::-webkit-slider-thumb {
   height: 1.25em;
   border-radius: 50%;
   background: #fff;
-  cursor: ew-resize;
+  cursor: pointer;
 }
 input[type='range']::-moz-range-thumb {
   box-sizing: border-box;
@@ -75,7 +82,7 @@ input[type='range']::-moz-range-thumb {
   height: 1.25em;
   border-radius: 50%;
   background: #fff;
-  cursor: ew-resize;
+  cursor: pointer;
 }
 input[type='range']::-ms-thumb {
   box-sizing: border-box;
@@ -84,7 +91,7 @@ input[type='range']::-ms-thumb {
   height: 1.25em;
   border-radius: 50%;
   background: #fff;
-  cursor: ew-resize;
+  cursor: pointer;
 }
 input[type='range']::-webkit-slider-runnable-track:before, input[type='range'] /deep/ #track:before {
   position: absolute;
@@ -155,15 +162,74 @@ input[type='range']:focus {
 
 .facts {
 
-  margin-top: 40px;
-
+  clear:both;
 }
 
 .fact {
 
   padding:20px;
-  margin: 5px 100px;
+  margin: 5px 170px;
   color: rgba(255, 255, 255, 0.32);
   font-size: 20px;
+  font-family: 'Special Elite', cursive;
+
+}
+
+.title {
+
+  float: left;
+  margin:0;
+  margin-top: 25px;
+  margin-left: -10px;
+  /* text-align: center; */
+  font-size: 90px;
+  font-family: 'fonta', cursive;
+  /* margin-left: 65px; */
+  color: rgba(255, 255, 255, 0.32);
+
+}
+
+.approved-img {
+
+  float: left;
+  z-index: -1;
+  width: 185px;
+  margin-left: -10px;
+
+}
+
+.github-ribbon{
+
+  float: right;
+  position: relative;
+  left: 230px;
+
+}
+
+.copy {
+
+  float: right;
+  position: relative;
+  left: 301px;
+  top: 30px;
+  width: 60px;
+  padding: 2px 5px 2px 4px;
+  color: #333;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #fff;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 3px;
+  background-color: #eee;
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#fcfcfc),color-stop(100%,#eee));
+  background-image: -webkit-linear-gradient(top,#fcfcfc 0,#eee 100%);
+  background-image: -moz-linear-gradient(top,#fcfcfc 0,#eee 100%);
+  background-image: -ms-linear-gradient(top,#fcfcfc 0,#eee 100%);
+  background-image: -o-linear-gradient(top,#fcfcfc 0,#eee 100%);
+  background-image: linear-gradient(to bottom,#fcfcfc 0,#eee 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#eeeeee', GradientType=0);
+  background-repeat: no-repeat;
+  border: 1px solid #d5d5d5;
+  font: 700 11px/14px 'Helvetica Neue',Helvetica,Arial,sans-serif;
 
 }
