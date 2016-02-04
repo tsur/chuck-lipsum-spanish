@@ -126,3 +126,26 @@ document.querySelector('#r1').addEventListener('click', function(e){
 generateLorem(1);
 
 var clipboard = new Clipboard('.copy');
+var keys = 0;
+
+document.addEventListener('keydown', function(e){
+
+  if(e.keyCode === 27) return document.querySelector('.egg').style.display = 'none';
+
+  keys++;
+
+});
+
+document.addEventListener('keyup', function(e){
+
+  if(keys > 3) document.querySelector('.egg').style.display = 'block';
+
+  keys = 0;
+
+  // setTimeout(function(){
+  //
+  //   document.querySelector('.egg').style.display = 'none';
+  //
+  // }, 9000);
+
+});
