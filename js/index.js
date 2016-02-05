@@ -1,50 +1,55 @@
-var range_els = document.querySelectorAll('[class*=webkit] input[type=range]'),
-    n_els, style_el, styles, units, base_sel, track_sel, _thumb_sel, a, b;
 
-if(range_els) {
-  style_el = document.createElement('style');
-  document.body.appendChild(style_el);
+function initSlider(){
 
-  n_els = range_els.length;
+  var range_els = document.querySelectorAll('[class*=webkit] input[type=range]'),
+      n_els, style_el, styles, units, base_sel, track_sel, _thumb_sel, a, b;
 
-  styles = [];
-  units = ['Parrafos', ['MB', 'GB'], 'GB'];
+  if(range_els) {
+    style_el = document.createElement('style');
+    document.body.appendChild(style_el);
 
-  base_sel = '.js input[type=range]';
-  track_sel = ['::-webkit-slider-runnable-track', ' /deep/ #track'];
-  thumb_sel = ['::-webkit-slider-thumb', ' /deep/ #thumb'];
-  a = ':after';
-  b = ':before';
+    n_els = range_els.length;
 
-  for(var i = 0; i < n_els; i++) {
-    styles.push('');
+    styles = [];
+    units = ['Parrafos', ['MB', 'GB'], 'GB'];
 
-    range_els[i].addEventListener('input', function() {
-      var idx = ~~this.id.split('r')[1],
-          min = this.min || 0,
-          max = this.max || 100,
-          perc = ~~(100*(this.value - min)/(max - min)),
-          val = ~~this.value,
-          u = units[idx - 1],
-          curr_sel = base_sel + '[id=r' + idx + ']',
-          str = '';
+    base_sel = '.js input[type=range]';
+    track_sel = ['::-webkit-slider-runnable-track', ' /deep/ #track'];
+    thumb_sel = ['::-webkit-slider-thumb', ' /deep/ #thumb'];
+    a = ':after';
+    b = ':before';
 
-      if(idx == 2) {
-        u = u[(val < 3)?0:1];
-        val = (val < 3) ? Math.pow(2, 7 + val) : (val - 2);
-      }
+    for(var i = 0; i < n_els; i++) {
+      styles.push('');
 
-      str += curr_sel + track_sel[0] + '{background-size:' + perc + '% 100%}';
-      str += curr_sel + thumb_sel[0] + b + ',' + curr_sel + thumb_sel[1] + b +
-        '{content:"' + val + '"}';
-      str += curr_sel + thumb_sel[0] + a + ',' + curr_sel + thumb_sel[1] + a +
-        '{content:"' + u + '"}';
+      range_els[i].addEventListener('input', function() {
+        var idx = ~~this.id.split('r')[1],
+            min = this.min || 0,
+            max = this.max || 100,
+            perc = ~~(100*(this.value - min)/(max - min)),
+            val = ~~this.value,
+            u = units[idx - 1],
+            curr_sel = base_sel + '[id=r' + idx + ']',
+            str = '';
 
-      styles[idx] = str;
+        if(idx == 2) {
+          u = u[(val < 3)?0:1];
+          val = (val < 3) ? Math.pow(2, 7 + val) : (val - 2);
+        }
 
-      style_el.textContent = styles.join('');
-    }, false);
+        str += curr_sel + track_sel[0] + '{background-size:' + perc + '% 100%}';
+        str += curr_sel + thumb_sel[0] + b + ',' + curr_sel + thumb_sel[1] + b +
+          '{content:"' + val + '"}';
+        str += curr_sel + thumb_sel[0] + a + ',' + curr_sel + thumb_sel[1] + a +
+          '{content:"' + u + '"}';
+
+        styles[idx] = str;
+
+        style_el.textContent = styles.join('');
+      }, false);
+    }
   }
+
 }
 
 function getRandomInt(min, max) {
@@ -111,41 +116,68 @@ function generateLorem(paragraphsNumber) {
     request.send();
 }
 
-document.querySelector('#r1').addEventListener('change', function(e){
 
-  generateLorem(e.target.value);
+function initClipboard(){
 
-});
+  var clipboard = new Clipboard('.copy');
 
-document.querySelector('#r1').addEventListener('click', function(e){
+}
 
-  generateLorem(e.target.value);
+function initLipsum(){
 
-});
+  document.querySelector('#r1').addEventListener('change', function(e){
 
-generateLorem(1);
+    generateLorem(e.target.value);
 
-var clipboard = new Clipboard('.copy');
-var keys = 0;
+  });
 
-document.addEventListener('keydown', function(e){
+  document.querySelector('#r1').addEventListener('click', function(e){
 
-  if(e.keyCode === 27) return document.querySelector('.egg').style.display = 'none';
+    generateLorem(e.target.value);
 
-  keys++;
+  });
 
-});
+  generateLorem(1);
+}
 
-document.addEventListener('keyup', function(e){
+function easterEgg(){
 
-  if(keys > 3) document.querySelector('.egg').style.display = 'block';
+  var keys = 0;
 
-  keys = 0;
+  var onKeydown = function(event){
 
-  // setTimeout(function(){
-  //
-  //   document.querySelector('.egg').style.display = 'none';
-  //
-  // }, 9000);
+    // if(event.keyCode === 27) return Array.from(document.querySelectorAll('.egg')).forEach(function(gif){ gif.style.display = 'none';});
+    if(event.keyCode === 27) document.querySelector('.easter-egg').style.display = 'none';
 
-});
+    keys++;
+
+  };
+
+  var onKeyup = function(event){
+
+    // if(keys > 3) Array.from(document.querySelectorAll('.egg')).forEach(function(gif){ gif.style.display = 'inline-block';});
+    if(keys > 3) document.querySelector('.easter-egg').style.display = 'block';
+
+    keys = 0;
+
+  }
+
+  document.addEventListener('keydown', onKeydown);
+
+  document.addEventListener('keyup', onKeyup);
+
+}
+
+function init(){
+
+  initSlider();
+
+  initLipsum();
+
+  initClipboard();
+
+  easterEgg();
+}
+
+
+init();
