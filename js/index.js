@@ -59,17 +59,21 @@ function getRandomInt(min, max) {
 
 function generateFacts(facts){
 
-  var paragraph = '';
+  var paragraph = [];
+  var occurrences = [];
 
-  for (var i = 0; i < 6; i++) {
-      if (i === 5) {
-          paragraph += facts[getRandomInt(0, facts.length - 1)] + '.';
-      } else {
-          paragraph += facts[getRandomInt(0, facts.length - 1)] + '. ';
-      }
+  while (paragraph.length < 5) {
+
+      var random = getRandomInt(0, facts.length - 1);
+
+      if(occurrences.indexOf(random) != -1) continue;
+
+      paragraph.push(facts[random]);
+
+      occurrences.push(random);
   }
 
-  return paragraph;
+  return paragraph.join('. ');
 
 }
 
